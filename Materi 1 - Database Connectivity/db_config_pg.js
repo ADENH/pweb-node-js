@@ -3,7 +3,7 @@ const { Client } = require('pg');
 // Database connection parameters
 const connectionParams = {
     user: 'postgres', // Replace with your PostgreSQL username
-    host: 'localhost', // Replace with your PostgreSQL host
+    host: '192.168.1.7', // Replace with your PostgreSQL host -> ip server
     database: 'praktisi_mengajar', // Replace with your PostgreSQL database name
     password: 'postgres', // Replace with your PostgreSQL password
     port: 5432 // Replace with your PostgreSQL port (default is 5432)

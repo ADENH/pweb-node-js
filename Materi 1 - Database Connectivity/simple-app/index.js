@@ -21,12 +21,17 @@ app.get('/postDataToTableUser', (req, res) => {
     postDataToTableUser(req, res);
 });
 
+//----------------------------------------------------------------------------//
+
 // ORM Sequelize
 app.get('/postDataToTableUserSequelize', async (req, res) => {
     await postDataToTableUserSequelize(req, res);
 });
 app.get('/getDataToTableUserSequelize', async (req, res) => {
     await getDataToTableUserSequelize(res);
+});
+app.get('/getDataToTableUserSequelizeById', async (req, res) => {
+    await getDataToTableUserSequelizeBy(res);
 });
 
 // Start the server
@@ -56,6 +61,19 @@ async function postDataToTableUserSequelize(req, res) {
 async function getDataToTableUserSequelize(res) {
     try {
         const users = await User.findAll();
+
+        // Send the retrieved users in the response
+        res.status(200).json(users);
+    } catch (error) {
+        // Handle any errors
+        console.error('Error retrieving data:', error);
+        res.status(500).json({ error: 'Error retrieving data' });
+    }
+}
+
+async function getDataToTableUserSequelizeBy(req,res) {
+    try {
+        const users = await User.findAndCountAll();
 
         // Send the retrieved users in the response
         res.status(200).json(users);
@@ -97,7 +115,7 @@ function getDataFromTable(req, res) {
 
         // Example query
         const query = 'SELECT * FROM ' + table;
-
+        
         // Execute the query
         connection.query(query, (err, results) => {
             // Release the connection back to the pool

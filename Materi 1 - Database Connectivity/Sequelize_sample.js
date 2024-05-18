@@ -57,6 +57,7 @@ async function findAllUsers() {
 // Function to update a user
 async function updateUser() {
   try {
+  
     const user = await User.findOne({ where: { firstName: 'John' } });
     if (user) {
       user.lastName = 'Smith';
